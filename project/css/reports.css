@@ -1,0 +1,17 @@
+.text-small {
+  font-size: 0.9rem;
+}
+
+.rounded {
+  border-radius: 1rem;
+}
+
+.position-center {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+a {
+  cursor: pointer;
+}

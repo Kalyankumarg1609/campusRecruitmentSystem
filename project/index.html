@@ -1,0 +1,221 @@
+
+<!--- website home page --->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kiet-recruitment</title>
+    <link rel="icon" href="media\hiring.png">
+    <link rel="stylesheet" href="../project/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../project/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="../project/css/styles.css">
+    <link rel="shortcut icon" href="#">
+    <script src="../project/js/jquery.min.js"></script>
+    <script src="../project/js/bootstrap.bundle.min.js"></script>
+    <script src="../project/js/fontAwesome.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+      <div class="container-lg">
+        <a class="navbar-brand fw-bold" >KIET Placements</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#hero">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#companies">Companies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Top Students</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item" id='signup' >
+              <a class="nav-link" href="view/signinpage.cfm">Sign in</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero" id="hero">
+      <div class="container-lg">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <h1 class="display-2 fw-bold">Placements</h1>
+            <p>At KIET Placements, we bridge the gap between talented students and leading employers, facilitating seamless connections that launch careers and drive organizational success. Our platform is designed to empower both students and employers, making the recruitment process efficient, transparent, and rewarding.
+            </p>
+            <!--- <button class="btn btn-outline-dark btn-lg">Projects</button> --->
+          </div>
+          <div class="col-sm-6 text-center">
+            <img src="media\maintheame.png" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="projects" id="companies">
+      <div class="container">
+        <h2 class="display-5 fw-bold mb-4">companies</h2>
+        <div class="row">
+            <div class="col-lg col-sm-6 mt-4">
+              <div class="card">
+                <img src="..\project\media\pngwing.com.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Wipro</h5>
+                  <p class="card-text"> Wipro is an Indian multinational corporation that provides information technology, consultant and business process services. </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg col-sm-6 mt-4">
+              <div class="card">
+                <img src="..\project\media\tcs.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">TCS</h5>
+                  <p class="card-text">Tata Consultancy Services Limited is an Indian multinational information technology services and consulting company headquartered in Mumbai.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg col-sm-6 mt-4">
+              <div class="card">
+                <img src="..\project\media\Deloitte.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Deloitte</h5>
+                  <p class="card-text">Deloitte is a leading global professional services firm, offering audit, tax, consulting, and advisory services to clients across industries. </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg col-sm-6 mt-4">
+              <div class="card">
+                <img src="..\project\media\accenture.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Accenture</h5>
+                  <p class="card-text">Accenture is a global professional services company offering a broad range of services and solutions in strategy, consulting, digital, technology </p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <cfquery name="getimg" datasource="recruitment">
+      select 
+        cu.firstname,
+        cc.industryname,
+        cc.location,
+        cc.salary,
+        ci.image_name
+      from
+        campus.selectedstudents as cs
+      left join campus.users as cu on 
+        cu.id = cs.candidate_id 
+      left join campus.criteria as cc on
+        cc.company_id = cs.recruit_id 
+      left join campus.img as ci on
+        ci.student_id = cu.id limit 3
+    </cfquery>
+
+    <section class="services" id="services">
+      <div class="container">
+        <h2 class="display-5 fw-bold mb-4">Top Students Selected For High Packages</h2>
+        <div class="row">
+          <cfloop query="getimg">
+            <cfset imagepath = "media/images/#getimg.image_name#">
+            <div class="col-lg col-sm-6 mt-4">
+              <div class="card">
+                 <img src="<cfoutput>#imagePath#</cfoutput>" class="card-img-top" id="imageset" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold"><cfoutput>#getimg.firstname#</cfoutput></h5>
+                  <p class="card-text">company : <cfoutput>#getimg.industryname#</cfoutput> </p>
+                  <p class="card-text">Package : <cfoutput>#getimg.salary#</cfoutput></p>
+                  <p class="card-text">Location: <cfoutput>#getimg.location#</cfoutput></p>
+                </div>
+              </div>
+            </div>
+          </cfloop>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2 class="display-5 fw-bold mb-4">Testimonials</h2>
+        <div id="carouselExample" class="carousel slide carousel-dark carousel-fade">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <p>"The recruitment system is incredibly efficient and user-friendly. It streamlines the entire process from job postings to interview scheduling. The interface is intuitive, making it easy for students to search for opportunities and apply with just a few clicks. The system also provides regular updates on application statuses, which helps reduce anxiety during the waiting period. Overall, it's a valuable tool that greatly enhances the job search experience for students." </p>
+              <h5>Abhi</h5>
+            </div>
+            <div class="carousel-item">
+              <p>"As a graduating senior, I've found the recruitment system to be invaluable in my job search. It centralizes job postings from various companies and industries, which saves me time in researching and applying to different opportunities. Additionally, the system offers resources such as resume-building workshops and mock interviews, which have been instrumental in preparing me for the recruitment process. The support provided by the system's administrators is also commendable, as they are always available to address any concerns or questions. I highly recommend this system to fellow students seeking employment post-graduation."
+              </p>
+              <h5>Bharhavi</h5>
+            </div>
+            <div class="carousel-item">
+              <p>"While the recruitment system has its merits, there are some areas for improvement. One issue is the lack of transparency in the selection process. Many students feel frustrated by the ambiguity surrounding the criteria used by companies to shortlist candidates. Additionally, the system could benefit from better integration with academic advisors to ensure that job opportunities align with students' career goals and academic backgrounds. Despite these shortcomings, the system remains a valuable resource for accessing job listings and networking opportunities on campus." </p>
+              <h5>Pavan</h5>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="display-5 fw-bold mb-4">About</h2>
+       
+        <p>Kiet Campus recruitment is the process where employers visit colleges and universities to recruit students for job positions. It involves activities like career fairs, interviews, and job offers, benefiting both employers seeking talent and students seeking employment opportunities.</p>
+        
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="display-5 fw-bold mb-4">Contact Me</h2>
+        <div class="row">
+          <div class="col-sm-4 mt-4">
+            <a href="#"><i class="fa-solid fa-envelope"></i> kiet@gmail.com</a>
+          </div>
+          <div class="col-sm-4 mt-4">
+            <div class="social-media">
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-google"></i></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+          </div>
+          <div class="col-sm-4 mt-4">
+            <a href="#"><i class="fa-solid fa-phone"></i> +1234567890</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center p-3 bg-body-tertiary">
+      <div>&copy; 2024. All Rights Reserved.</div>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+.dt-search{
+    display: none !important;
+}
+
+.page-item.active .page-link{
+  color: #000;
+}
+
+#Branch, #category, #industryname,
+#uname, #button{
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+#button{
+  background-color:#00FFFF;
+}
+
+#button:hover{
+  background-color:#00CCCC ;
+}
+
+.navbar-nav{
+  cursor: pointer;
+}
